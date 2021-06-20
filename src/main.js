@@ -1,18 +1,10 @@
-import Phaser from 'phaser'
+import k from './kaboom'
+import Snake from './scenes/Snake'
 
-import HelloWorldScene from './scenes/HelloWorldScene'
+k.scene('test', () => {
+    console.log('test scene loaded')
+})
 
-const config = {
-	type: Phaser.AUTO,
-	width: 800,
-	height: 600,
-	physics: {
-		default: 'arcade',
-		arcade: {
-			gravity: { y: 200 }
-		}
-	},
-	scene: [HelloWorldScene]
-}
+k.scene('snake', Snake)
 
-export default new Phaser.Game(config)
+k.start('snake')
