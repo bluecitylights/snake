@@ -19,7 +19,7 @@ export default function movement() {
         update() {
             accumulatedTime += dt()
 
-            if (accumulatedTime < 0.5) {
+            if (accumulatedTime < 0.25) {
                 return
             }
 

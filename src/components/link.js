@@ -6,6 +6,7 @@ export default function link() {
     } = k
     
     let child
+    let isNew = true
     const nextPosition = vec2(0, 0)
    
     
@@ -31,11 +32,17 @@ export default function link() {
             this.pos.x = pos.x
             this.pos.y = pos.y
 
+            isNew = false
+
             if (!child) {
                 return
             }
 
             child.moveUpdate(pos.x, pos.y)
+        },
+
+        isNew() {
+            return isNew
         }
 
     }

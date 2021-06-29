@@ -15,14 +15,23 @@ export default function Snake() {
         origin,
         overlaps,
         destroy,
-        camShake
+        camShake,
+        text,
+        go
     } = k
 
+    let score = 0
     const spawner = add([
         spawn()
     ])
 
-   let end =  add([
+    const scoreText = add([
+        pos(2, 2),
+        text(`Score: ${score}`),
+        color(1, 1, 1, 1)
+    ]);
+   
+    let end =  add([
         pos(8, 8),
         rect(16, 16),
         color(0, 1, 0, 1),
@@ -37,15 +46,20 @@ export default function Snake() {
 
     overlaps('head', 'food', (head, food) => {
         destroy(food)
-
+        
         camShake(3)
+
+        score = score + 1;
+        scoreText.text = `Score: ${score}`
+            
 
         const newChild = add([
             pos(end.pos.x, end.pos.y),
             rect(16, 16),
             color(0, 1, 0, 1),
             origin('center'),
-            link()
+            link(),
+            'body'
 
         ])
 
@@ -54,5 +68,13 @@ export default function Snake() {
         end = newChild
 
         spawner.spawn()
+    })
+
+    overlaps('head', 'body', (head, body) => {
+        if (body.isNew()) {
+            return
+        }
+
+        go('game-over', {score})
     })
 }
