@@ -1,18 +1,9 @@
-import Phaser from 'phaser'
+import k from './kaboom'
 
-import HelloWorldScene from './scenes/HelloWorldScene'
+import Snake from './scenes/Snake'
+import GameOver from './scenes/GameOVer'
 
-const config = {
-	type: Phaser.AUTO,
-	width: 800,
-	height: 600,
-	physics: {
-		default: 'arcade',
-		arcade: {
-			gravity: { y: 200 }
-		}
-	},
-	scene: [HelloWorldScene]
-}
+k.scene('snake', Snake)
+k.scene('game-over', GameOver)
 
-export default new Phaser.Game(config)
+k.start('snake')
